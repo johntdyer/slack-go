@@ -14,11 +14,27 @@ type Client struct {
 }
 
 type Message struct {
-	Text      string `json:"text"`
-	Username  string `json:"username"`
-	IconUrl   string `json:"icon_url"`
-	IconEmoji string `json:"icon_emoji"`
-	Channel   string `json:"channel"`
+	Text        string        `json:"text"`
+	Username    string        `json:"username"`
+	IconUrl     string        `json:"icon_url"`
+	IconEmoji   string        `json:"icon_emoji"`
+	Channel     string        `json:"channel"`
+	UnfurlLinks bool          `json:"unfurl_links"`
+	Attachments []*Attachment `json:"attachments"`
+}
+
+type Attachment struct {
+	Fallback string   `json:"fallback"`
+	Text     string   `json:"text"`
+	Pretext  string   `json:"pretext"`
+	Color    string   `json:"color"`
+	Fields   []*Field `json:"fields"`
+}
+
+type Field struct {
+	Title string `json:"title"`
+	Value string `json:"value"`
+	Short bool   `json:"short"`
 }
 
 type SlackError struct {
@@ -56,4 +72,24 @@ func (c *Client) SendMessage(msg *Message) error {
 	}
 
 	return nil
+}
+
+func (m *Message) NewAttachment() *Attachment {
+	a := &Attachment{}
+	m.Attachments = append(m.Attachments, a)
+	return a
+}
+
+func (m *Message) AddAttachment(a *Attachment) {
+	m.Attachments = append(m.Attachments, a)
+}
+
+func (a *Attachment) NewField() *Field {
+	f := &Field{}
+	a.Fields = append(a.Fields, f)
+	return f
+}
+
+func (a *Attachment) AddField(f *Field) {
+	a.Fields = append(a.Fields, f)
 }
