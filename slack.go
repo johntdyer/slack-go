@@ -76,7 +76,7 @@ func (c *Client) SendMessage(msg *Message) error {
 
 func (m *Message) NewAttachment() *Attachment {
 	a := &Attachment{}
-	m.Attachments = append(m.Attachments, a)
+	m.AddAttachment(a)
 	return a
 }
 
@@ -86,7 +86,7 @@ func (m *Message) AddAttachment(a *Attachment) {
 
 func (a *Attachment) NewField() *Field {
 	f := &Field{}
-	a.Fields = append(a.Fields, f)
+	a.AddField(f)
 	return f
 }
 
