@@ -49,18 +49,14 @@ func NewClient(url string) *Client {
 	return &Client{url}
 }
 
-func (c *Client) getUrl() string {
-	return c.Url
-}
-
 func (c *Client) SendMessage(msg *Message) error {
 
 	body, _ := json.Marshal(msg)
 	fmt.Println(string(body))
 	buf := bytes.NewReader(body)
 
-	http.NewRequest("POST", c.getUrl(), buf)
-	resp, err := http.Post(c.getUrl(), "application/json", buf)
+	http.NewRequest("POST", c.Url, buf)
+	resp, err := http.Post(c.Url, "application/json", buf)
 	if err != nil {
 		return err
 	}
