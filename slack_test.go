@@ -12,12 +12,11 @@ var (
 
 func init() {
 	client = &Client{}
-	flag.StringVar(&client.Domain, "domain", "", "slack domain")
-	flag.StringVar(&client.Token, "token", "", "slack token")
+	flag.StringVar(&client.Url, "url", "", "webhook url")
 	flag.Parse()
-	if client.Domain == "" || client.Token == "" {
+	if client.Url == "" {
 		flag.PrintDefaults()
-		panic("\n=================\nYou need to specify -domain and -token flags\n=================\n\n")
+		panic("\n=================\nYou need to specify -url flag\n=================\n\n")
 	}
 }
 

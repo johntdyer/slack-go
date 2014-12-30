@@ -9,8 +9,7 @@ import (
 )
 
 type Client struct {
-	Domain string
-	Token  string
+	Url string
 }
 
 type Message struct {
@@ -46,12 +45,12 @@ func (e *SlackError) Error() string {
 	return fmt.Sprintf("SlackError: %d %s", e.Code, e.Body)
 }
 
-func NewClient(domain, token string) *Client {
-	return &Client{domain, token}
+func NewClient(url string) *Client {
+	return &Client{url}
 }
 
 func (c *Client) getUrl() string {
-	return fmt.Sprintf("https://%s/services/hooks/incoming-webhook?token=%s", c.Domain, c.Token)
+	return fmt.Sprintf(c.Url)
 }
 
 func (c *Client) SendMessage(msg *Message) error {
