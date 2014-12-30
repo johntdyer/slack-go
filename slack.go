@@ -50,7 +50,7 @@ func NewClient(url string) *Client {
 }
 
 func (c *Client) getUrl() string {
-	return fmt.Sprintf(c.Url)
+	return c.Url
 }
 
 func (c *Client) SendMessage(msg *Message) error {
