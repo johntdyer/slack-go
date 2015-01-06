@@ -52,7 +52,6 @@ func NewClient(url string) *Client {
 func (c *Client) SendMessage(msg *Message) error {
 
 	body, _ := json.Marshal(msg)
-	fmt.Println(string(body))
 	buf := bytes.NewReader(body)
 
 	http.NewRequest("POST", c.Url, buf)
