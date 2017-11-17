@@ -23,6 +23,7 @@ type Message struct {
 }
 
 type Attachment struct {
+	Title    string   `json:"title"`
 	Fallback string   `json:"fallback"`
 	Text     string   `json:"text"`
 	Pretext  string   `json:"pretext"`
