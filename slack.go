@@ -55,7 +55,6 @@ func (c *Client) SendMessage(msg *Message) error {
 	body, _ := json.Marshal(msg)
 	buf := bytes.NewReader(body)
 
-	http.NewRequest("POST", c.Url, buf)
 	resp, err := http.Post(c.Url, "application/json", buf)
 	if err != nil {
 		return err
